@@ -21,7 +21,7 @@
     <body>
         <center>
             <div class="intro">
-            <h1 style="color: black;">E-Learning System</h1>
+            <h1 style="color: brown;">E-Learning System</h1>
 
                 <a href="login.php" class="btn"> login </a> &emsp;
                 <a href="register.php" class="btn"> register </a>

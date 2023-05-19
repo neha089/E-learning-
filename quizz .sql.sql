@@ -1,32 +1,59 @@
--- Active: 1682658430517@@localhost@3306
-
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 14, 2023 at 02:25 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `quizz`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
 
 CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+--
+-- Dumping data for table `admin`
+--
 
 INSERT INTO `admin` (`admin_id`, `email`, `password`) VALUES
 (1, 'np1646122@gmail.com', 'xyzwqwer');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `answer`
+--
 
 CREATE TABLE `answer` (
   `qid` text NOT NULL,
   `ansid` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+--
+-- Dumping data for table `answer`
+--
 
 INSERT INTO `answer` (`qid`, `ansid`) VALUES
 ('5b141d712647f', '5b141d71485b9'),
@@ -50,7 +77,57 @@ INSERT INTO `answer` (`qid`, `ansid`) VALUES
 ('5b1422674286d', '5b1422674aa01'),
 ('5b1422677371f', '5b1422677b3e9');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `doubt`
+--
+
+CREATE TABLE `doubt` (
+  `name` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `subject` varchar(20) NOT NULL,
+  `query` varchar(200) NOT NULL,
+  `reply` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `doubt`
+--
+
+INSERT INTO `doubt` (`name`, `email`, `subject`, `query`, `reply`) VALUES
+('neha', 'poiu@gmail.com', 'cpp', 'heelooo', 'yes'),
+('iv', 'pd22122001@gmail.com', 'php', 'php why?', 'imp');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `email` varchar(30) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_type` varchar(255) NOT NULL,
+  `file_size` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`email`, `title`, `file_name`, `file_type`, `file_size`, `file_path`, `created_at`) VALUES
+('poiu@gmail.com', 'xsaok', 'que..1.jpeg', 'image/jpeg', 93146, 'upload/que..1.jpeg', '2023-05-14 10:41:25'),
+('poiu@gmail.com', 'php', 'crud (2).php', 'application/octet-stream', 3070, 'upload/crud (2).php', '2023-05-14 14:23:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history`
+--
 
 CREATE TABLE `history` (
   `email` varchar(50) NOT NULL,
@@ -59,28 +136,66 @@ CREATE TABLE `history` (
   `level` int(11) NOT NULL,
   `right` int(11) NOT NULL,
   `wrong` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+--
+-- Dumping data for table `history`
+--
 
 INSERT INTO `history` (`email`, `eid`, `score`, `level`, `right`, `wrong`, `date`) VALUES
 ('np1646122@gmail.com', '5b141b8009cf0', 27, 10, 8, 2, '2018-06-03 16:56:00'),
-('pinky@gmail.com', '5b141b8009cf0', 30, 10, 10, 0, '2018-06-03 16:57:45'),
 ('nehay123@gmail.com', '5b141b8009cf0', 22, 10, 8, 2, '2018-06-03 16:59:06'),
-('dishap8@gmail.com', '5b141f1e8399e', 26, 10, 9, 1, '2018-06-03 17:17:26');
+('dishap8@gmail.com', '5b141f1e8399e', 26, 10, 9, 1, '2018-06-03 17:17:26'),
+('abcs@gmail.com', '5b141f1e8399e', 26, 10, 9, 1, '2023-05-06 05:11:31'),
+('abcs@gmail.com', '5b141f1e8399e', 26, 10, 9, 1, '2023-05-06 05:11:31');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `material`
+--
+
+CREATE TABLE `material` (
+  `email` varchar(30) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_type` varchar(255) NOT NULL,
+  `file_size` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `material`
+--
+
+INSERT INTO `material` (`email`, `title`, `file_name`, `file_type`, `file_size`, `file_path`, `created_at`) VALUES
+('', 'cpp', 'que..1.jpeg', 'image/jpeg', 93146, 'upload/que..1.jpeg', '2023-05-14 10:09:50'),
+('', 'php', 'crud (2).php', 'application/octet-stream', 3070, 'upload/crud (2).php', '2023-05-14 10:22:49'),
+('', 'cp', 'que..1.jpeg', 'image/jpeg', 93146, 'upload/que..1.jpeg', '2023-05-14 10:24:19'),
+('', 'cpp', 'que..1.jpeg', 'image/jpeg', 93146, 'upload/que..1.jpeg', '2023-05-14 10:35:45'),
+('', 'cpp', 'que..1.jpeg', 'image/jpeg', 93146, 'upload/que..1.jpeg', '2023-05-14 10:40:45'),
+('', 'cpp', 'que..1.jpeg', 'image/jpeg', 93146, 'upload/que..1.jpeg', '2023-05-14 10:41:03'),
+('', 'cpp.....', 'que..1.jpeg', 'image/jpeg', 93146, 'upload/que..1.jpeg', '2023-05-14 14:22:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `options`
+--
 
 CREATE TABLE `options` (
   `qid` varchar(50) NOT NULL,
   `option` varchar(5000) NOT NULL,
   `optionid` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `options`
+--
 
 INSERT INTO `options` (`qid`, `option`, `optionid`) VALUES
-
 ('5b141d712647f', 'Personal Home Page', '5b141d71485b9'),
 ('5b141d712647f', 'Private Home Page', '5b141d71485dc'),
 ('5b141d712647f', 'Pretext Hypertext Processor', '5b141d71485e0'),
@@ -162,6 +277,11 @@ INSERT INTO `options` (`qid`, `option`, `optionid`) VALUES
 ('5b1422677371f', 'delete', '5b1422677b3fc'),
 ('5b1422677371f', 'create', '5b1422677b400');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
 
 CREATE TABLE `questions` (
   `eid` text NOT NULL,
@@ -169,9 +289,11 @@ CREATE TABLE `questions` (
   `qns` text NOT NULL,
   `choice` int(10) NOT NULL,
   `sn` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+--
+-- Dumping data for table `questions`
+--
 
 INSERT INTO `questions` (`eid`, `qid`, `qns`, `choice`, `sn`) VALUES
 ('5b141b8009cf0', '5b141d712647f', 'What does PHP stand for?', 4, 1),
@@ -191,12 +313,15 @@ INSERT INTO `questions` (`eid`, `qid`, `qns`, `choice`, `sn`) VALUES
 ('5b141f1e8399e', '5b14226663cf4', 'Copy Construcotre Have ______ As  Argument?', 4, 5),
 ('5b141f1e8399e', '5b1422669481b', 'CPP Compiler Written in?', 4, 6),
 ('5b141f1e8399e', '5b142266c525c', 'All Namespace Have Name ? ', 4, 7),
-('5b141f1e8399e', '5b14226711d91', 'which have block?', 4, 8),
+('5b141f1e8399e', '5b14226711d91', 'Which of the following have block?', 4, 8),
 ('5b141f1e8399e', '5b1422674286d', '- Choose the invalid identifier from the below', 4, 9),
 ('5b141f1e8399e', '5b1422677371f', 'which keyword use to create dynamic memory ', 4, 10);
 
+-- --------------------------------------------------------
 
-
+--
+-- Table structure for table `quiz`
+--
 
 CREATE TABLE `quiz` (
   `eid` text NOT NULL,
@@ -204,140 +329,124 @@ CREATE TABLE `quiz` (
   `right` int(11) NOT NULL,
   `wrong` int(11) NOT NULL,
   `total` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+--
+-- Dumping data for table `quiz`
+--
 
 INSERT INTO `quiz` (`eid`, `title`, `right`, `wrong`, `total`, `date`) VALUES
 ('5b141b8009cf0', 'Php & Mysqli', 3, 1, 10, '2018-06-03 16:46:56'),
-('5b141f1e8399e', 'CPP', 3, 1, 10, '2018-06-03 17:02:22');
+('5b141f1e8399e', 'CPP', 3, 1, 10, '2023-05-06 13:10:03');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `rank`
+--
 
 CREATE TABLE `rank` (
   `email` varchar(50) NOT NULL,
   `score` int(11) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+--
+-- Dumping data for table `rank`
+--
 
 INSERT INTO `rank` (`email`, `score`, `time`) VALUES
-('pinky@gmail.com', 30, '2018-06-03 16:57:45'),
-('priyanka@gmail.com', 22, '2018-06-03 16:59:06');
+('priyanka@gmail.com', 22, '2018-06-03 16:59:06'),
+('abcs@gmail.com', 26, '2023-05-06 05:11:31');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `study_content`
+--
+
+CREATE TABLE `study_content` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `study_content`
+--
+
+INSERT INTO `study_content` (`id`, `title`, `content`) VALUES
+(1, 'cpp', 'cpp is oop lan.'),
+(2, 'cpp', 'cpp is oop'),
+(3, 'cpp', 'cpp is opp\r\n'),
+(4, 'cpp', 'cpp is opp\r\n'),
+(5, 'cedw', 'few'),
+(6, 'cd', 'cde'),
+(7, 'cpp', 'cpp opp');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
 
 CREATE TABLE `user` (
   `name` varchar(50) NOT NULL,
   `college` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+--
+-- Dumping data for table `user`
+--
 
 INSERT INTO `user` (`name`, `college`, `email`, `password`) VALUES
-('Swagatika Padhi', 'National Institute of Science and Technology, surat', 'pinky@gmail.com', 'pinky'),
-('Priyanka Pattnaik', 'National Institute of Science and Technology, surat', 'priyanka@gmail.com', 'pinka');
-CREATE TABLE `material` (
-  `id` int(11) NOT NULL,
-  `Name` varchar(20) NOT NULL,
-  `Date` date NOT NULL,
-  `file` varchar(255) NOT NULL,
-  `directory` varchar(155) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `material`
---
-
-INSERT INTO `material` (`id`, `Name`, `Date`, `file`, `directory`) VALUES
-(1, 'PPS', '2023-05-02', '1.Manipulator.cpp', '1.Manipulator.cpp'),
-(2, 'PPS', '2023-05-03', 'fiber.pdf', 'fiber.pdf'),
-(4, 'Image', '2023-05-06', 'i.jpg', 'i.jpg'),
-(5, 'physics', '2023-05-07', 'photo_detector.pdf', 'photo_detector.pdf'),
-(6, 'doc', '2023-05-07', 'ViewGeneratedDocs.ashx-2.pdf', 'ViewGeneratedDocs.ashx-2.pdf'),
-(7, 'video', '2023-05-07', 'hv.mp4', 'hv.mp4');
+('abcd', 'qwertyuiop', 'abcs@gmail.com', '12345'),
+('iv', '12345', 'pd22122001@gmail.com', '12345'),
+('poiu', 'poiu', 'poiu@gmail.com', 'poiu'),
+('Priyanka Pattnaik', 'National Institute of Science and Technology, Berhampur', 'priyanka@gmail.com', 'pinka');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `material`
+-- Indexes for table `admin`
 --
-CREATE TABLE `doubt` (
-  `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `subject` varchar(20) NOT NULL,
-  `query` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `doubt`
---
-
-INSERT INTO `doubt` (`id`, `name`, `email`, `subject`, `query`) VALUES
-(1, 'Patel Disha J.', 'disha.patel0608@gmail.com', 'PHP', 'i can\'t understand php code for storing data in database'),
-(29, 'Patel Jiya D.', 'JD@2911.com', 'PPS', 'I can\'t understand data hiding.');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `doubt`
---
-ALTER TABLE `doubt`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `doubt`
---
-ALTER TABLE `doubt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-ALTER TABLE `material`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `material`
---
-ALTER TABLE `material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
+--
+-- Indexes for table `study_content`
+--
+ALTER TABLE `study_content`
+  ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `user`
+--
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`email`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
+--
+-- AUTO_INCREMENT for table `admin`
+--
 ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `study_content`
+--
+ALTER TABLE `study_content`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

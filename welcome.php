@@ -47,10 +47,12 @@
             <li <?php if(@$_GET['q']==1) echo'class="active"'; ?> ><a href="welcome.php?q=1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;QUIZ<span class="sr-only"></span></a></li>
             <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>> <a href="welcome.php?q=2"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;History</a></li>
             <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>> <a href="welcome.php?q=3"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking</a></li>
-            <li <?php echo'class="active"'; ?>> <a href="contain.html"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Content</a></li>
+            
             <li <?php  echo'class="active"'; ?>> <a href="d.html"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Doubt</a></li>
-            <li <?php  echo'class="active"'; ?>> <a href="md.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Material</a></li>
-            <li <?php  echo'class="active"'; ?>> <a href="index1.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;File_Upload</a></li>
+            <li <?php  echo'class="active"'; ?>> <a href="mat.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Material</a></li>
+            <li <?php  echo'class="active"'; ?>> <a href="upload.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;File_Upload</a></li>
+            <li <?php  echo'class="active"'; ?>> <a href="sreply.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Show reply</a></li>
+            <li <?php  echo'class="active"'; ?>> <a href="scon.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Show Content</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
         <li <?php echo''; ?> > <a href="logout.php?q=welcome.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>

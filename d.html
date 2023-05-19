@@ -1,39 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Doubt Form</title>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body style="background-color:pink">
-<div class="container">
-<div class="row">
-<div class="col-lg-8 col-offset-2">
-<div class="page-header">
-<h2>Doubt</h2>
-</div>
-<p>Please fill all fields in the form</p>
-<form action="doubt.php" method="post">
-<div class="form-group">
-<label>Name</label>
-<input type="text" name="name" class="form-control" value="" maxlength="50" required=""placeholder="FirstName MiddleName LastName(surname)"><span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
-</div
-<div class="form-group ">
-<label>Email</label>
-<input type="email" name="email" class="form-control" value="" maxlength="30" required="">
-</div>
-<div class="form-group">
-<label>Subject</label>
-<input type="text" name="subject" class="form-control" required="">
-</div>
-<div class="form-group">
-<label>Query</label>
-<input type="textarea" name="query" class="form-control" required="">
-</div>
-<button type="submit" class="btn btn-primary" name="Doubt">Submit</button>
-</form>
-</div>
-</div>    
-</div>
-</body>
-</html>
+<form method="post" action="doubt.php">
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <input type="text" name="subject">
+    <textarea name="query"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+  

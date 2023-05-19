@@ -1,103 +1,126 @@
 <?php
-	include("database.php");
-	session_start();
-	
-	if(isset($_POST['submit']))
-	{	
-		$name = $_POST['name'];
-		$name = stripslashes($name);
-		$name = addslashes($name);
+include("database.php");
+session_start();
 
-		$email = $_POST['email'];
-		$email = stripslashes($email);
-		$email = addslashes($email);
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $name = stripslashes($name);
+    $name = addslashes($name);
 
-		$password = $_POST['password'];
-		$password = stripslashes($password);
-		$password = addslashes($password);
+    $email = $_POST['email'];
+    $email = stripslashes($email);
+    $email = addslashes($email);
 
-		$college = $_POST['college'];
-		$college = stripslashes($college);
-		$college = addslashes($college);
-		$str="SELECT email from user WHERE email='$email'";
-		$result=mysqli_query($con,$str);
-		
-		if((mysqli_num_rows($result))>0)	
-		{
-            echo "<center><h3><script>alert('Sorry.. This email is already registered !!');</script></h3></center>";
+    $password = $_POST['password'];
+    $password = stripslashes($password);
+    $password = addslashes($password);
+
+    $college = $_POST['college'];
+    $college = stripslashes($college);
+    $college = addslashes($college);
+
+    $userCaptcha = $_POST['cname'];
+    $storedCaptcha = $_SESSION['CAPTCHA_CODE'];
+
+    if ($userCaptcha !== $storedCaptcha) {
+        echo "<center><h3><script>alert('Invalid CAPTCHA code');</script></h3></center>";
+        header("refresh:0;url=register.php");
+    } else {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $con->prepare("SELECT email FROM user WHERE email=?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            echo "<center><h3><script>alert('Sorry.. This email is already registered!');</script></h3></center>";
             header("refresh:0;url=login.php");
+        } else {
+            $stmt = $con->prepare("INSERT INTO user (name, email, password, college) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $name, $email, $hashedPassword, $college);
+            if ($stmt->execute()) {
+                echo "<center><h3><script>alert('Congrats.. You have successfully registered!');</script></h3></center>";
+                header('location: welcome.php?q=1');
+            } else {
+                echo "<center><h3><script>alert('Registration failed. Please try again.');</script></h3></center>";
+                header("refresh:0;url=register.php");
+            }
         }
-		else
-		{
-            $str="insert into user set name='$name',email='$email',password='$password',college='$college'";
-			if((mysqli_query($con,$str)))	
-			echo "<center><h3><script>alert('Congrats.. You have successfully registered !!');</script></h3></center>";
-			header('location: welcome.php?q=1');
-		}
+        $stmt->close();
     }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>Register | Online E-Learning System</title>
-		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
-		<link rel="stylesheet" href="scripts/ionicons/css/ionicons.min.css">
-		<link rel="stylesheet" href="css/form.css">
-        <style type="text/css">
-            body{
-                  width: 100%;
-                  background: url(image/book.png) ;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-attachment: fixed;
-                  background-size: cover;
-                }
-          </style>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register | Online E-Learning System</title>
+    <link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="scripts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="css/form.css">
+    <style type="text/css">
+        body {
+            width: 100%;
+            background: url(image/book.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
 
-	<body>
-		<section class="login first grey">
-			<div class="container">
-				<div class="box-wrapper">				
-					<div class="box box-border">
-						<div class="box-body">
-							<center> <h5 style="font-family: Noto Sans;">Register to </h5><h4 style="font-family: Noto Sans;">Online E-Learning System</h4></center><br>
-							<form method="post" action="register.php" enctype="multipart/form-data">
-                                <div class="form-group">
-									<label>Enter Your Username:</label>
-									<input type="text" name="name" class="form-control" required />
-								</div>
-								<div class="form-group">
-									<label>Enter Your Email Id:</label>
-									<input type="email" name="email" class="form-control" required />
-								</div>
-								<div class="form-group">
-									<label>Enter Your Password:</label>
-									<input type="password" name="password" class="form-control" required />
-                                </div>
-								<div class="form-group">
-									<label>Enter Your College Name:</label>
-									<input type="text" name="college" class="form-control" required />
-								</div>
-                                
-								<div class="form-group text-right">
-									<button class="btn btn-primary btn-block" name="submit">Register</button>
-								</div>
-								<div class="form-group text-center">
-									<span class="text-muted">Already have an account! </span> <a href="login.php">Login </a> Here..
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+<body>
+<section class="login first grey">
+    <div class="container">
+        <div class="box-wrapper">
+            <div class="box box-border">
+                <div class="box-body">
+                    <center>
+                        <h5 style="font-family: Noto Sans;">Register to</h5>
+                        <h4 style="font-family: Noto Sans;">Online E-Learning System</h4>
+                    </center><br>
+                    <form method="post" action="register.php" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Enter Your Username:</label>
+                            <input type="text" name="name" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Your Email Id:</label>
+                            <input type="email" name="email" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Your Password:</label>
+                            <input type="password" name="password" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Your College Name:</label>
+                            <input type="text" name="college" class="form-control" required />
+                        </div>
+                        <label for="lname">Enter CAPTCHA:</label><br>
+        <input type="text" id="lname" name="cname" required><br><br> 
+        <img src="captcha.php" alt="CAPTCHA Image">
+        <div class="form-group text-right">
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary btn-block" name="submit">Register</button>
+                        </div>
+                        <div class="form-group text-center">
+                            <span class="text-muted">Already have an account! </span> <a href="login.php">Login  Here.. </a>
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-		<script src="js/jquery.js"></script>
-		<script src="scripts/bootstrap/bootstrap.min.js"></script>
-	</body>
+<script src="js/jquery.js"></script>
+<script src="scripts/bootstrap/bootstrap.min.js"></script>
+</body>
 </html>

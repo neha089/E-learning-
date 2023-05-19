@@ -1,14 +1,16 @@
-<?php include "upload.php";?>
-<title>PHP Image Upload Example</title>
-<form action="" method="post" enctype="multipart/form-data">
-    <!---<input type="file" name="fileUpload" id="chooseFile">	//single file--->
-	<input type="file" name="fileUpload[]" id="chooseFile" multiple>	//multiple file 
-    <button type="submit" name="submit">Upload File</button>
-</form>
-<h3>For Download Uploaded file:<a href="download.php">Download</a></h3>
-<!-- Display response messages -->
-<?php if(!empty($resMessage)) {
-    echo $resMessage['message'];
-}
-?>
-
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload Material</title>
+</head>
+<body>
+	<h1>Upload Material</h1>
+	<form method="post" enctype="multipart/form-data" action="aupload.php">
+		<label for="title">Title:</label><br>
+		<input type="text" name="title" required><br><br>
+		<label for="file">File:</label><br>
+		<input type="file" name="file" required><br><br>
+		<input type="submit" name="submit" value="Upload">
+	</form>
+</body>
+</html>

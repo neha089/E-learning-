@@ -48,6 +48,13 @@
                     <li class="dropdown <?php if(@$_GET['q']==4 || @$_GET['q']==5) echo'active"'; ?>">
                     <li><a href="dashboard.php?q=4">Add Quiz</a></li>
                     <li><a href="dashboard.php?q=5">Remove Quiz</a></li>
+                    <li <?php echo'class="active"'; ?>> <a href="cont.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; Add Content</a></li>
+                    <li <?php echo'class="active"'; ?>> <a href="admin.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; show doubt</a></li>
+                    <li <?php echo'class="active"'; ?>> <a href="index1.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; Add files</a></li>
+                    <li <?php echo'class="active"'; ?>> <a href="ashow.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; show files</a></li>
+                    
+                    
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li <?php echo''; ?> > <a href="logout1.php?q=dashboard.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>

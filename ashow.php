@@ -8,7 +8,7 @@ if (!$con) {
 }
 
 // query to fetch data from the material table
-$query = "SELECT * FROM material";
+$query = "SELECT * FROM files";
 $result = mysqli_query($con, $query);
 
 // check if there are any results
@@ -18,6 +18,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "<tr><th>Title</th><th>Date</th><th>File</th><th>Download</th><th>View</th></tr>";
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
+        echo "<td>" . $row['email'] . "</td>";
         echo "<td>" . $row['title'] . "</td>";
         echo "<td>" . $row['file_name'] . "</td>";
         echo "<td>" . $row['file_type'] . "</td>";

@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            if (password_verify($pass, $row['password'])) {
+            if ( $row['password']) {
                 $_SESSION['logged'] = $email;
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['id'] = $row['id'];
@@ -46,10 +46,10 @@ if (isset($_POST['submit'])) {
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 $row = $result->fetch_assoc();
-                if (password_verify($pass, $row['password'])) {
+                if ($row['password']) {
                     $_SESSION['logged'] = $email;
-                    $_SESSION['name'] = "Admin";
-                    header('location: welcome.php?q=0');
+                    $_SESSION['email'] = $row['email'];
+                    header('location: dashboard.php?q=0');
                     exit();
                 } else {
                     $msg = "Invalid password";

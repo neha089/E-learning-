@@ -7,7 +7,7 @@
     }
     else
     {
-        $name = $_SESSION['name'];
+        // $name = $_SESSION['name'];
         $email = $_SESSION['email'];
         include_once 'database.php';
     }
@@ -27,7 +27,7 @@
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"  type="text/javascript"></script>
 </head>
-<body>
+<body style="background-color:black">
     <nav class="navbar navbar-default title1">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -48,7 +48,7 @@
             <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>> <a href="welcome.php?q=2"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;History</a></li>
             <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>> <a href="welcome.php?q=3"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking</a></li>
             
-            <li <?php  echo'class="active"'; ?>> <a href="d.html"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Doubt</a></li>
+            <li <?php  echo'class="active"'; ?>> <a href="doubt.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Doubt</a></li>
             <li <?php  echo'class="active"'; ?>> <a href="mat.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Material</a></li>
             <li <?php  echo'class="active"'; ?>> <a href="upload.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;File_Upload</a></li>
             <li <?php  echo'class="active"'; ?>> <a href="sreply.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Show reply</a></li>
@@ -146,34 +146,74 @@
                         }
                         echo '</table></div>';
                     }
-                ?>
+                
 
-                <?php
-                    if(@$_GET['q']== 2) 
-                    {
-                        $q=mysqli_query($con,"SELECT * FROM history WHERE email='$email' ORDER BY date DESC " )or die('Error197');
-                        echo  '<div class="panel title">
-                        <table class="table table-striped title1" >
-                        <tr style="color:black;"><td><center><b>S.N.</b></center></td><td><center><b>Quiz</b></center></td><td><center><b>Question Solved</b></center></td><td><center><b>Right</b></center></td><td><center><b>Wrong<b></center></td><td><center><b>Score</b></center></td>';
-                        $c=0;
-                        while($row=mysqli_fetch_array($q) )
-                        {
-                        $eid=$row['eid'];
-                        $s=$row['score'];
-                        $w=$row['wrong'];
-                        $r=$row['right'];
-                        $qa=$row['level'];
-                        $q23=mysqli_query($con,"SELECT title FROM quiz WHERE  eid='$eid' " )or die('Error208');
 
-                        while($row=mysqli_fetch_array($q23) )
-                        {  $title=$row['title'];  }
-                        $c++;
-                        echo '<tr><td><center>'.$c.'</center></td><td><center>'.$title.'</center></td><td><center>'.$qa.'</center></td><td><center>'.$r.'</center></td><td><center>'.$w.'</center></td><td><center>'.$s.'</center></td></tr>';
+                    
+                    if (@$_GET['q'] == 2) {
+                        $q = mysqli_query($con, "SELECT * FROM history WHERE email='$email' ORDER BY date DESC ") or die('Error197');
+                    
+                        
+                        $c = 0;
+                        $correctCounts = array();
+                        $incorrectCounts = array();
+                        $quizTitles = array();
+                    
+                        while ($row = mysqli_fetch_array($q)) {
+                            $eid = $row['eid'];
+                            $s = $row['score'];
+                            $w = $row['wrong'];
+                            $r = $row['right'];
+                            $qa = $row['level'];
+                    
+                            $q23 = mysqli_query($con, "SELECT title FROM quiz WHERE  eid='$eid' ") or die('Error208');
+                            while ($row = mysqli_fetch_array($q23)) {
+                                $title = $row['title'];
+                            }
+                    
+                            $c++;
+                    
+                            
+                            // Store counts for graph
+                            $correctCounts[] = $r;
+                            $incorrectCounts[] = $w;
+                            $quizTitles[] = $title;
                         }
-                        echo'</table></div>';
+                    
+                        echo '</table></div>';
+                    
+                        // Create graph
+                        echo '<div id="graphContainer" style="width: 100%; height: 400px;"></div>';
+                    
+                        echo '<script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>';
+                        echo '<script>
+                                var options = {
+                                    chart: {
+                                        type: "bar",
+                                        height: 350,
+                                        stacked: true,
+                                    },
+                                    series: [
+                                        {
+                                            name: "Correct",
+                                            data: ' . json_encode($correctCounts) . ',
+                                        },
+                                        {
+                                            name: "Incorrect",
+                                            data: ' . json_encode($incorrectCounts) . ',
+                                        },
+                                    ],
+                                    xaxis: {
+                                        categories: ' . json_encode($quizTitles) . ',
+                                    },
+                                };
+                    
+                                var chart = new ApexCharts(document.querySelector("#graphContainer"), options);
+                                chart.render();
+                            </script>';
                     }
-
-                    if(@$_GET['q']== 3) 
+                       
+if(@$_GET['q']== 3) 
                     {
                         $q=mysqli_query($con,"SELECT * FROM rank ORDER BY score DESC " )or die('Error223');
                         echo  '<div class="panel title"><div class="table-responsive">

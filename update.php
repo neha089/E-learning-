@@ -1,7 +1,11 @@
 <?php
+
 include_once 'database.php';
+
 session_start();
+
 $email = $_SESSION['email'];
+$_SESSION['key'] = 'qwer'; // Set the "key" value
 
 if(isset($_SESSION['email']))
 {

@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $password = stripslashes($password);
     $password = addslashes($password);
-
+  
     $college = $_POST['college'];
     $college = stripslashes($college);
     $college = addslashes($college);
@@ -26,7 +26,8 @@ if (isset($_POST['submit'])) {
         echo "<center><h3><script>alert('Invalid CAPTCHA code');</script></h3></center>";
         header("refresh:0;url=register.php");
     } else {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        // Hash the password
+        $hashedPassword = $password;
 
         $stmt = $con->prepare("SELECT email FROM user WHERE email=?");
         $stmt->bind_param("s", $email);
@@ -53,6 +54,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,17 +64,7 @@ if (isset($_POST['submit'])) {
     <title>Register | Online E-Learning System</title>
     <link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="scripts/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="css/form.css">
-    <style type="text/css">
-        body {
-            width: 100%;
-            background: url(image/book.png);
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -82,8 +74,8 @@ if (isset($_POST['submit'])) {
             <div class="box box-border">
                 <div class="box-body">
                     <center>
-                        <h5 style="font-family: Noto Sans;">Register to</h5>
-                        <h4 style="font-family: Noto Sans;">Online E-Learning System</h4>
+                        <h5>Register to</h5>
+                        <h4>Online E-Learning System</h4>
                     </center><br>
                     <form method="post" action="register.php" enctype="multipart/form-data">
                         <div class="form-group">
@@ -103,15 +95,13 @@ if (isset($_POST['submit'])) {
                             <input type="text" name="college" class="form-control" required />
                         </div>
                         <label for="lname">Enter CAPTCHA:</label><br>
-        <input type="text" id="lname" name="cname" required><br><br> 
-        <img src="captcha.php" alt="CAPTCHA Image">
-        <div class="form-group text-right">
+                        <input type="text" id="lname" name="cname" required><br><br> 
+                        <img src="captcha.php" alt="CAPTCHA Image">
                         <div class="form-group text-right">
                             <button class="btn btn-primary btn-block" name="submit">Register</button>
                         </div>
                         <div class="form-group text-center">
                             <span class="text-muted">Already have an account! </span> <a href="login.php">Login  Here.. </a>
-                           
                         </div>
                     </form>
                 </div>

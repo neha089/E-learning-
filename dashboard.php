@@ -7,7 +7,7 @@
     }
     else
     {
-        $name = $_SESSION['name'];
+       // $name = $_SESSION['name'];
         $email = $_SESSION['email'];
         include_once 'database.php';
     }
@@ -27,55 +27,67 @@
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"  type="text/javascript"></script>
 </head>
-
+<style>
+ .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+     background-image:linear-gradient(#00004d 55%,#0000);/*,#000033 30%*/
+    }
+    .header .logo {
+      font-size: 25px;
+      font-family: 'Sriracha', cursive;
+      color: #000;
+      text-decoration: none;
+      margin-left: 30px;
+    }
+    .header h2{
+     color:yellowgreen;
+}
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-right: 20px;
+    }
+    .nav-items a {
+      text-decoration: none;
+      color:yellowgreen;
+      padding: 35px 20px;
+    }
+    
+</style>
 <body>
-    <nav class="navbar navbar-default title1">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="Javascript:void(0)"><b>Online E-Learning System</b></a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-left">
-                    <li <?php if(@$_GET['q']==0) echo'class="active"'; ?>><a href="dashboard.php?q=0">Home<span class="sr-only">(current)</span></a></li>
-                    <li <?php if(@$_GET['q']==1) echo'class="active"'; ?>><a href="dashboard.php?q=1">User</a></li>
-                    <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a href="dashboard.php?q=2">Ranking</a></li>
-                    <li class="dropdown <?php if(@$_GET['q']==4 || @$_GET['q']==5) echo'active"'; ?>">
-                    <li><a href="dashboard.php?q=4">Add Quiz</a></li>
-                    <li><a href="dashboard.php?q=5">Remove Quiz</a></li>
-                    <li <?php echo'class="active"'; ?>> <a href="cont.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; Add Content</a></li>
-                    <li <?php echo'class="active"'; ?>> <a href="admin.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; show doubt</a></li>
-                    <li <?php echo'class="active"'; ?>> <a href="index1.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; Add files</a></li>
-                    <li <?php echo'class="active"'; ?>> <a href="ashow.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; show files</a></li>
-                    
-                    
-                    
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li <?php echo''; ?> > <a href="logout1.php?q=dashboard.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <?php if(@$_GET['q']==0)
-                {
-                   echo "<h1> WELCOME TO Admin Page!!
-					</h1>";
-					
-                }
-
-                if(@$_GET['q']== 2) 
-                {
-                    $q=mysqli_query($con,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
+<div class="header">
+<h2>Online E-learningSystem</h2>
+ <?php if(@$_GET['q']==0) ?>
+<a href="dashboard.php?q=0">Home</a>
+<nav class="nav-items">
+ <?php if(@$_GET['q']==1) ?>
+<a href="dashboard.php?q=1">User</a>
+ <?php if(@$_GET['q']==2)  ?>
+<a href="dashboard.php?q=2">Ranking</a>
+ <?php if(@$_GET['q']==4 || @$_GET['q']==5) ?>
+<a href="dashboard.php?q=4">Add Quiz</a>
+<a href="dashboard.php?q=5">Remove Quiz</a>
+<?php if(@$_GET['q']==6) ?>
+ <a href="cont.php?q=6">Add Content</a>
+<?php if(@$_GET['q']==7) ?>
+ <a href="admin.php?q=7">Show Doubt</a>
+<?php if(@$_GET['q']==10)?>
+<a href="index1.php?q=10">Add Files</a>
+<?php if(@$_GET['q']==9) ?>
+<a href="ashow.php?q=9">Show Files</a>
+ <a href="logout1.php?q=dashboard.php">Logout</a>
+</nav>
+</div>
+ <?php if(@$_GET['q']==0)
+  {
+        echo "<h1> WELCOME TO Admin Page!!</h1>";
+}      
+if(@$_GET['q']== 2) 
+{
+           $q=mysqli_query($con,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
                     echo  '<div class="panel title"><div class="table-responsive">
                     <table class="table table-striped title1" >
                     <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Name</b></center></td><td><center><b>Score</b></center></td></tr>';
@@ -257,6 +269,7 @@
                         echo '</table></div></div>';
                     }
                 ?>
+              
             </div>
         </div>
     </div>

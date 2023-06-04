@@ -67,7 +67,8 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body background="blog-8.jpg">
+
 <section class="login first grey">
     <div class="container">
         <div class="box-wrapper">

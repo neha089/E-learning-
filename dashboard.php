@@ -32,7 +32,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-     background-image:linear-gradient(#00004d 55%,#0000);/*,#000033 30%*/
+     background-image:linear-gradient(#00004d 55%,#0000);,#000033 30%
     }
     .header .logo {
       font-size: 25px;
@@ -42,7 +42,7 @@
       margin-left: 30px;
     }
     .header h2{
-     color:yellowgreen;
+     color:black;
 }
     .nav-items {
       display: flex;
@@ -52,14 +52,14 @@
     }
     .nav-items a {
       text-decoration: none;
-      color:yellowgreen;
+      color:white;
       padding: 35px 20px;
     }
     
 </style>
 <body>
 <div class="header">
-<h2>Online E-learningSystem</h2>
+<h2 style="color:white">Online E-learningSystem</h2>
  <?php if(@$_GET['q']==0) ?>
 <a href="dashboard.php?q=0">Home</a>
 <nav class="nav-items">
@@ -81,33 +81,44 @@
  <a href="logout1.php?q=dashboard.php">Logout</a>
 </nav>
 </div>
+
  <?php if(@$_GET['q']==0)
   {
-        echo "<h1> WELCOME TO Admin Page!!</h1>";
+        echo "<h1 style='color:white'> WELCOME TO Admin Page!!</h1>";
 }      
-if(@$_GET['q']== 2) 
-{
-           $q=mysqli_query($con,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
-                    echo  '<div class="panel title"><div class="table-responsive">
-                    <table class="table table-striped title1" >
-                    <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Name</b></center></td><td><center><b>Score</b></center></td></tr>';
-                    $c=0;
-                    while($row=mysqli_fetch_array($q) )
-                    {
-                        $e=$row['email'];
-                        $s=$row['score'];
-                        $q12=mysqli_query($con,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
-                        while($row=mysqli_fetch_array($q12) )
-                        {
-                            $name=$row['name'];
-                            $college=$row['college'];
-                        }
-                        $c++;
-                        echo '<tr><td style="color:#99cc32"><center><b>'.$c.'</b></center></td><td><center>'.$e.'</center></td><td><center>'.$s.'</center></td>';
-                    }
-                    echo '</table></div></div>';
-                }
-                ?>
+if (@$_GET['q'] == 2) {
+    $q = mysqli_query($con, "SELECT score,date,email FROM history ORDER BY score DESC") or die('Error223');
+    echo '<div class="panel title">
+            <div class="table-responsive">
+                <table class="table table-striped title1">
+                    <tr style="color:red">
+                        <td><center><b>Rank</b></center></td>
+                        <td><center><b>Name</b></center></td>
+                        <td><center><b>Score</b></center></td>
+                    </tr>';
+
+    $c = 0;
+
+    while ($row = mysqli_fetch_array($q)) {
+        $e = $row['email'];
+        $s = $row['score'];
+        $q12 = mysqli_query($con, "SELECT name, college FROM user WHERE email='$e'") or die('Error231');
+        while ($row1 = mysqli_fetch_array($q12)) {
+            $name = $row1['name'];
+            $college = $row1['college'];
+        }
+        $c++;
+        echo '<tr>
+                <td style="color:#99cc32"><center><b>'.$c.'</b></center></td>
+                <td><center>'.$name.'</center></td>
+                <td><center>'.$s.'</center></td>
+              </tr>';
+    }
+    echo '</table>
+        </div>
+    </div>';
+}
+?>
                 <?php 
                     if(@$_GET['q']==1) 
                     {

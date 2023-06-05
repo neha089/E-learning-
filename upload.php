@@ -26,16 +26,58 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-left">
-            <li <?php if(@$_GET['q']==8) echo'class="active"'; ?> ><a href="welcome.php?q=8"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;HOME<span class="sr-only">(current)</span></a></li>
-            <li <?php if(@$_GET['q']==1) echo'class="active"'; ?> ><a href="welcome.php?q=1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;QUIZ<span class="sr-only"></span></a></li>
-            <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a href="welcome.php?q=2"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;History</a></li>
-            <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="welcome.php?q=3"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking</a></li>
-            <li <?php echo'class="active"'; ?>><a href="d.html"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Doubt</a></li>
-            <li <?php echo'class="active"'; ?>><a href="mat.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Material</a></li>
-            <li <?php echo'class="active"'; ?>><a href="upload.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;File_Upload</a></li>
-            <li <?php echo'class="active"'; ?>><a href="sreply.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Show reply</a></li>
-            <li <?php echo'class="active"'; ?>><a href="scon.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Show Content</a></li>
-          </ul>
+          <li <?php if(@$_GET['q']==8) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=8">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;HOME<span class="sr-only">(current)</span>
+  </a>
+</li>
+<li <?php if(@$_GET['q']==1) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=1">
+    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;QUIZ<span class="sr-only"></span>
+  </a>
+</li>
+<li <?php if(@$_GET['q']==2) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=2">
+    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;History
+  </a>
+</li>
+<li <?php if(@$_GET['q']==3) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=3">
+    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="doubt.php">
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;Doubt
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="mat.php">
+    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Material
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="upload.php">
+    <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;File Upload
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="sreply.php">
+    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;Show Reply
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="scon.php">
+    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Show Content
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="chat.php">
+    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;chat
+  </a>
+</li>
+
+</ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="logout.php?q=welcome.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
           </ul>

@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome | E-lEARNING SYSTEM</title>
+    <title>Welcome | E-lEARNING</title>
     <link  rel="stylesheet" href="css/bootstrap.min.css"/>
     <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>    
     <link rel="stylesheet" href="css/welcome.css">
@@ -43,17 +43,57 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
-        <li <?php if(@$_GET['q']==8) echo'class="active"'; ?> ><a href="welcome.php?q=8"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;HOME<span class="sr-only">(current)</span></a></li>
-            <li <?php if(@$_GET['q']==1) echo'class="active"'; ?> ><a href="welcome.php?q=1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;QUIZ<span class="sr-only"></span></a></li>
-            <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>> <a href="welcome.php?q=2"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;History</a></li>
-            <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>> <a href="welcome.php?q=3"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking</a></li>
-            
-            <li <?php  echo'class="active"'; ?>> <a href="doubt.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Doubt</a></li>
-            <li <?php  echo'class="active"'; ?>> <a href="mat.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Material</a></li>
-            <li <?php  echo'class="active"'; ?>> <a href="upload.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;File_Upload</a></li>
-            <li <?php  echo'class="active"'; ?>> <a href="sreply.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Show reply</a></li>
-            <li <?php  echo'class="active"'; ?>> <a href="scon.php"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Show Content</a></li>
-        </ul>
+        <li <?php if(@$_GET['q']==8) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=8">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;HOME<span class="sr-only">(current)</span>
+  </a>
+</li>
+<li <?php if(@$_GET['q']==1) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=1">
+    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;QUIZ<span class="sr-only"></span>
+  </a>
+</li>
+<li <?php if(@$_GET['q']==2) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=2">
+    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;History
+  </a>
+</li>
+<li <?php if(@$_GET['q']==3) echo 'class="active"'; ?> >
+  <a href="welcome.php?q=3">
+    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="doubt.php">
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;Doubt
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="mat.php">
+    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Material
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="upload.php">
+    <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;File Upload
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="sreply.php">
+    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;Show Reply
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="scon.php">
+    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Show Content
+  </a>
+</li>
+<li <?php echo 'class="active"'; ?> >
+  <a href="chat.php">
+    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;chat
+  </a>
+</li>
+</ul>
         <ul class="nav navbar-nav navbar-right">
         <li <?php echo''; ?> > <a href="logout.php?q=welcome.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
         </ul>
@@ -68,7 +108,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <?php if(@$_GET['q']==1) 
+                <?php 
+                if(@$_GET['q']==8)
+                {
+                      echo "<h1 style='color:white'> WELCOME TO E-learning website ! feel free to explore the things !!</h1>";
+              }      
+                if(@$_GET['q']==1) 
                 {
                     $result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
                     echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
@@ -213,28 +258,39 @@
                             </script>';
                     }
                        
-if(@$_GET['q']== 3) 
-                    {
-                        $q=mysqli_query($con,"SELECT * FROM rank ORDER BY score DESC " )or die('Error223');
-                        echo  '<div class="panel title"><div class="table-responsive">
-                        <table class="table table-striped title1" >
-                        <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Name</b></center></td><td><center><b>Email</b></center></td><td><center><b>Score</b></center></td></tr>';
-                        $c=0;
-
-                        while($row=mysqli_fetch_array($q) )
-                        {
-                            $e=$row['email'];
-                            $s=$row['score'];
-                            $q12=mysqli_query($con,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
-                            while($row=mysqli_fetch_array($q12) )
-                            {
-                                $name=$row['name'];
+                    
+                    if (@$_GET['q'] == 3) {
+                        $q = mysqli_query($con, "SELECT score,date,email FROM history ORDER BY score DESC") or die('Error223');
+                        echo '<div class="panel title">
+                                <div class="table-responsive">
+                                    <table class="table table-striped title1">
+                                        <tr style="color:red">
+                                            <td><center><b>Rank</b></center></td>
+                                            <td><center><b>Name</b></center></td>
+                                            <td><center><b>Score</b></center></td>
+                                        </tr>';
+                    
+                        $c = 0;
+                    
+                        while ($row = mysqli_fetch_array($q)) {
+                            $e = $row['email'];
+                            $s = $row['score'];
+                            $q12 = mysqli_query($con, "SELECT name, college FROM user WHERE email='$e'") or die('Error231');
+                            while ($row1 = mysqli_fetch_array($q12)) {
+                                $name = $row1['name'];
+                                $college = $row1['college'];
                             }
                             $c++;
-                            echo '<tr><td style="color:black"><center><b>'.$c.'</b></center></td><td><center>'.$name.'</center></td><td><center>'.$e.'</center></td><td><center>'.$s.'</center></td></tr>';
+                            echo '<tr>
+                                    <td style="color:#99cc32"><center><b>'.$c.'</b></center></td>
+                                    <td><center>'.$name.'</center></td>
+                                    <td><center>'.$s.'</center></td>
+                                  </tr>';
                         }
-                        echo '</table></div></div>';
+                        echo '</table>
+                            </div>
+                        </div>';
                     }
-                ?>
+                    ?>
 </body>
 </html>

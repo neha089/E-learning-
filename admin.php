@@ -2,9 +2,15 @@
 <html>
 <head>
   <title>Add Study Content</title>
+  <link  rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>    
+    <link rel="stylesheet" href="css/welcome.css">
+    <link  rel="stylesheet" href="css/font.css">
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"  type="text/javascript"></script>
 </head>
 <style>
-body{background-color:#0b9164;
+body{
 margin:auto;
 text-align:center;}
  .header {
@@ -21,7 +27,7 @@ text-align:center;}
       margin-left: 30px;
     }
     .header h2{
-     color:yellowgreen;
+    
 }
     .nav-items {
       display: flex;
@@ -31,13 +37,13 @@ text-align:center;}
     }
     .nav-items a {
       text-decoration: none;
-      color:yellowgreen;
+     
       padding: 35px 20px;
     }
-th {color:white;}
-td {color:yellow;}
+th {color:black;}
+td {color:black;}
 table, th, td {
-  border:0.09px solid GreenYellow;
+  border:0.09px solid black;
   text-align:center;
   font-size:125%;
   padding:9px 9px;
@@ -47,7 +53,7 @@ margin:auto;
     
 </style>
 <div class="header">
-<h2>Online E-learningSystem</h2>
+<h2 style="color:white">Online E-learningSystem</h2>
  <?php if(@$_GET['q']==0) ?>
 <a href="dashboard.php?q=0">Home</a>
 <nav class="nav-items">
@@ -91,7 +97,7 @@ margin:auto;
 <div class="table-responsive">
 <table class="table table-striped title1">
     <tr>
-        <th>Name</th>
+       
         <th>Email</th>
         <th>Subject</th>
         <th>Query</th>
@@ -100,7 +106,7 @@ margin:auto;
     </tr>
     <?php while($row = mysqli_fetch_array($result)) { ?>
     <tr>
-        <td><?php echo $row['name']; ?></td>
+       
         <td><?php echo $row['email']; ?></td>
         <td><?php echo $row['subject']; ?></td>
         <td><?php echo $row['query']; ?></td>

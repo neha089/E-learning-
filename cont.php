@@ -7,25 +7,46 @@ if (mysqli_connect_errno()) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $title = $_POST['title'];
   $content = $_POST['content'];
-  $sql = "INSERT INTO study_content (title, content) VALUES ('$title', '$content')";
-  if (mysqli_query($con, $sql)) {
-           $_SESSION['success'] = "Study content added successfully!";
-  } 
-  else {
-         $_SESSION['error'] = "Failed to add study content: " . mysqli_error($con);
+  
+  // Prepare the SQL statement with placeholders
+  $sql = "INSERT INTO study_content (title, content) VALUES (?, ?)";
+  
+  // Prepare the statement
+  $stmt = mysqli_prepare($con, $sql);
+  
+  // Bind the parameters and set their values
+  mysqli_stmt_bind_param($stmt, 'ss', $title, $content);
+  
+  if (mysqli_stmt_execute($stmt)) {
+    $_SESSION['success'] = "Study content added successfully!";
+  } else {
+    $_SESSION['error'] = "Failed to add study content: " . mysqli_error($con);
   }
+  
+  // Close the statement
+  mysqli_stmt_close($stmt);
+  
   header("Location: cont.php");
   exit();
 }
 ?>
 
+<!-- Rest of your HTML code -->
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Add Study Content</title>
+  <link  rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>    
+    <link rel="stylesheet" href="css/welcome.css">
+    <link  rel="stylesheet" href="css/font.css">
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"  type="text/javascript"></script>
+</head>
 </head>
 <style>
-body{background-color:#0b9164;
+body{
 margin:auto;
 text-align:center;}
  .header {
@@ -42,7 +63,7 @@ text-align:center;}
       margin-left: 30px;
     }
     .header h2{
-     color:yellowgreen;
+    
 }
     .nav-items {
       display: flex;
@@ -52,14 +73,14 @@ text-align:center;}
     }
     .nav-items a {
       text-decoration: none;
-      color:yellowgreen;
+     
       padding: 35px 20px;
     }
     
 </style>
 <body>
 <div class="header">
-<h2>Online E-learningSystem</h2>
+<h2 style="color:white">Online E-learningSystem</h2>
  <?php if(@$_GET['q']==0) ?>
 <a href="dashboard.php?q=0">Home</a>
 <nav class="nav-items">
@@ -82,9 +103,9 @@ text-align:center;}
 </nav>
 </div>
 <body>
-  <h1>Add Study Content</h1>
+  <h1 style="color:white">Add Study Content</h1>
   <?php if (isset($_SESSION['success'])): ?>
-    <div style="color: green"><?php echo $_SESSION['success']; ?></div>
+    <div style="color: black"><?php echo $_SESSION['success']; ?></div>
     <?php unset($_SESSION['success']); ?>
   <?php endif; ?>
   <?php if (isset($_SESSION['error'])): ?>

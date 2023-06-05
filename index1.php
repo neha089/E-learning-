@@ -5,11 +5,15 @@
 <head>
 
 	<title>Upload Material</title>
+  
+  
+
 
 </head>
 
 <style>
-body{background-color:#0b9164;
+body{
+  background-color: black;
 margin:auto;
 text-align:center;}
  .header {
@@ -33,6 +37,7 @@ text-align:center;}
       justify-content: space-around;
       align-items: center;
       margin-right: 20px;
+      color:white
     }
     .nav-items a {
       text-decoration: none;
@@ -41,31 +46,31 @@ text-align:center;}
     }
 </style>
 <div class="header">
-<h2>Online E-learningSystem</h2>
+<h2 style="color:white">Online E-learningSystem</h2>
  <?php if(@$_GET['q']==0) ?>
-<a href="dashboard.php?q=0">Home</a>
+<a style="color:white" href="dashboard.php?q=0">Home</a>
 <nav class="nav-items">
  <?php if(@$_GET['q']==1) ?>
-<a href="dashboard.php?q=1">User</a>
+<a style="color:white" href="dashboard.php?q=1">User</a>
  <?php if(@$_GET['q']==2)  ?>
-<a href="dashboard.php?q=2">Ranking</a>
+<a style="color:white" href="dashboard.php?q=2">Ranking</a>
  <?php if(@$_GET['q']==4 || @$_GET['q']==5) ?>
-<a href="dashboard.php?q=4">Add Quiz</a>
-<a href="dashboard.php?q=5">Remove Quiz</a>
+<a style="color:white" href="dashboard.php?q=4">Add Quiz</a>
+<a style="color:white" href="dashboard.php?q=5">Remove Quiz</a>
 <?php if(@$_GET['q']==6) ?>
- <a href="cont.php?q=6">Add Content</a>
+ <a style="color:white" href="cont.php?q=6">Add Content</a>
 <?php if(@$_GET['q']==7) ?>
- <a href="admin.php?q=7">Show Doubt</a>
+ <a style="color:white" href="admin.php?q=7">Show Doubt</a>
 <?php if(@$_GET['q']==10)?>
-<a href="index1.php?q=10">Add Files</a>
+<a  style="color:white"href="index1.php?q=10">Add Files</a>
 <?php if(@$_GET['q']==9) ?>
-<a href="ashow.php?q=9">Show Files</a>
- <a href="logout1.php?q=dashboard.php">Logout</a>
+<a style="color:white" href="ashow.php?q=9">Show Files</a>
+ <a style="color:white" href="logout1.php?q=dashboard.php">Logout</a>
 </nav>
 </div>
 <body>
 
-<h1>Upload Material</h1>
+<h1 style="color:white">Upload Material</h1>
 	
 <form method="post" enctype="multipart/form-data" action="aupload.php">
 		

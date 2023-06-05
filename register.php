@@ -96,7 +96,7 @@ if (isset($_POST['submit'])) {
                             <input type="text" name="college" class="form-control" required />
                         </div>
                         <label for="lname">Enter CAPTCHA:</label><br>
-                        <input type="text" id="lname" name="cname" required><br><br> 
+                        <p style="color:black"><input type="text" id="lname" name="cname" required></p><br><br> 
                         <img src="captcha.php" alt="CAPTCHA Image">
                         <div class="form-group text-right">
                             <button class="btn btn-primary btn-block" name="submit">Register</button>

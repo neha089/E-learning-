@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
         header("refresh:0;url=register.php");
     } else {
         // Hash the password
-        $hashedPassword = $password;
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $con->prepare("SELECT email FROM user WHERE email=?");
         $stmt->bind_param("s", $email);
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
             $stmt->bind_param("ssss", $name, $email, $hashedPassword, $college);
             if ($stmt->execute()) {
                 echo "<center><h3><script>alert('Congrats.. You have successfully registered!');</script></h3></center>";
-                header('location: welcome.php?q=1');
+                header('location: login.php');
             } else {
                 echo "<center><h3><script>alert('Registration failed. Please try again.');</script></h3></center>";
                 header("refresh:0;url=register.php");

@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         if ($password) {
             $_SESSION['logged'] = $email;
             $_SESSION['email'] = $row['email'];
-            header('location: welcome.php?q=1');
+            header('location: welcome.php?q=8');
             exit();
         } else {
             $msg = "Invalid password";

@@ -110,7 +110,7 @@ if (@$_GET['q'] == 2) {
         $c++;
         echo '<tr>
                 <td style="color:#99cc32"><center><b>'.$c.'</b></center></td>
-                <td><center>'.$name.'</center></td>
+                <td><center>'.$e.'</center></td>
                 <td><center>'.$s.'</center></td>
               </tr>';
     }

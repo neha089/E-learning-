@@ -28,10 +28,10 @@ if (isset($_POST['submit'])) {
         $row = $result->fetch_assoc();
         $hashedPassword = $row['password'];
 
-        echo "Input Password: " . $password . "<br>";
-        echo "Hashed Password from Database: " . $hashedPassword . "<br>";
+        // echo "Input Password: " . $password . "<br>";
+        // echo "Hashed Password from Database: " . $hashedPassword . "<br>";
 
-        if ($password) {
+        if ($password==$row['password']) {
             $_SESSION['logged'] = $email;
             $_SESSION['email'] = $row['email'];
             header('location: welcome.php?q=8');

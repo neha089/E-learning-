@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
         header("refresh:0;url=register.php");
     } else {
         // Hash the password
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $hashedPassword = $password;
 
         $stmt = $con->prepare("SELECT email FROM user WHERE email=?");
         $stmt->bind_param("s", $email);

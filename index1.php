@@ -65,6 +65,7 @@ text-align:center;}
 <a  style="color:white"href="index1.php?q=10">Add Files</a>
 <?php if(@$_GET['q']==9) ?>
 <a style="color:white" href="ashow.php?q=9">Show Files</a>
+
  <a style="color:white" href="logout1.php?q=dashboard.php">Logout</a>
 </nav>
 </div>
